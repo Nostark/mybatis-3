@@ -37,11 +37,13 @@ class AutoConstructorTest {
   @BeforeAll
   static void setUp() throws Exception {
     // create a SqlSessionFactory
+    //创建SqlSessionFactory，基于mybatis-config.xml文件
     try (Reader reader = Resources.getResourceAsReader("org/apache/ibatis/autoconstructor/mybatis-config.xml")) {
       sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
     }
 
     // populate in-memory database
+    //使用内存数据库，创建表并且初始化内存数据
     BaseDataTest.runScript(sqlSessionFactory.getConfiguration().getEnvironment().getDataSource(),
         "org/apache/ibatis/autoconstructor/CreateDB.sql");
   }
